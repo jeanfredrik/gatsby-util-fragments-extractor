@@ -1,0 +1,25 @@
+{
+  "name": "gatsby-util-fragments-extractor",
+  "version": "1.0.0",
+  "description": "Utility that can be used to extract GraphQL fragments for use in Gatsby Node API",
+  "main": "index.js",
+  "author": "Fredrik Johansson <jeanfredrik@gmail.com>",
+  "license": "MIT",
+  "repository": "git@github.com:jeanfredrik/gatsby-util-fragments-extractor.git",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "lodash": "^4.17.20",
+    "tagged-template-noop": "^2.1.1"
+  },
+  "peerDependencies": {
+    "gatsby": "^2.31.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.18.0",
+    "prettier": "^2.2.1"
+  },
+  "scripts": {
+    "format": "prettier --write '**/*.{js,json,md,yml}'"
+  }
+}

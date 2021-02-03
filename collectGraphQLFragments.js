@@ -12,16 +12,15 @@ const collectGraphQLFragments = async (dirname) => {
   const files = glob.sync(path.resolve(dirname, "**/*.js"));
   const parsedFiles = await parser.parseFiles(files);
   const collectedFragments = [];
-
   parsedFiles
-    .filter((item) => item.doc && item.doc.kind === "Document")
+    .filter((file) => file.doc && file.doc.kind === "Document")
     .forEach((file) => {
       const fragments =
         file.doc.definitions.filter(
           (def) => def.kind === "FragmentDefinition",
         ) || [];
 
-      return collectedFragments.push(
+      collectedFragments.push(
         ...fragments.map(({ loc: { start, end, source: { body } } }) =>
           body.slice(start, end),
         ),

@@ -10,20 +10,25 @@ const glob = require("glob");
 const collectGraphQLFragments = async (dirname) => {
   const parser = new GatsbyParser();
   const files = glob.sync(path.resolve(dirname, "**/*.js"));
-  const result = await parser.parseFiles(files);
+  const parsedFiles = await parser.parseFiles(files);
+  const collectedFragments = [];
 
-  return result
+  parsedFiles
     .filter((item) => item.doc && item.doc.kind === "Document")
-    .flatMap((file) => {
+    .forEach((file) => {
       const fragments =
         file.doc.definitions.filter(
           (def) => def.kind === "FragmentDefinition",
         ) || [];
 
-      return fragments.map(({ loc: { start, end, source: { body } } }) =>
-        body.slice(start, end),
+      return collectedFragments.push(
+        ...fragments.map(({ loc: { start, end, source: { body } } }) =>
+          body.slice(start, end),
+        ),
       );
     });
+
+  return collectedFragments;
 };
 
 module.exports = collectGraphQLFragments;

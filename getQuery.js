@@ -1,4 +1,4 @@
-const gql = require("graphql-tag");
+const gql = require("graphql-tag").default;
 
 module.exports = function getQuery(query) {
   if (typeof query === "object" && query.definitions) {
